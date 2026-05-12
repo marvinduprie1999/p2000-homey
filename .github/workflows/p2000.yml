@@ -1,0 +1,21 @@
+name: P2000 naar Homey
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"
+  workflow_dispatch:
+
+jobs:
+  p2000:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Haal P2000 op
+        run: |
+          curl -s "https://feeds.livep2000.nl/" > p2000.txt
+
+      - name: Zoek melding
+        run: |
+          if grep -i "brand" p2000.txt; then
+            curl -X POST "https://webhook.homey.app/69c163d0abb19ba0299182a7/p2000"
+          fi
