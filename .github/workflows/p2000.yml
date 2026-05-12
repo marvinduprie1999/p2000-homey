@@ -16,6 +16,6 @@ jobs:
 
       - name: Zoek melding
         run: |
-          if grep -i "brand" p2000.txt; then
+          if grep -i "1503900" p2000.txt; then
             curl -X POST "https://webhook.homey.app/69c163d0abb19ba0299182a7/p2000"
           fi
